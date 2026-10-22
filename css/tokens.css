@@ -1,0 +1,284 @@
+/*
+ * Detox – design tokens
+ *
+ * Three layers:
+ *   1. Primitive – raw values (palette, sizes). Never used directly in components.
+ *   2. Semantic  – purpose (background, foreground, primary…). Light + dark.
+ *   3. Component – aliases for specific components (button, card, input, tab bar).
+ *
+ * Style: Soft minimalism – calm, warm paper background, sage green primary,
+ * soft shadows, rounded corners. All text colours are ≥ 4.5:1 in both themes,
+ * control borders ≥ 3:1.
+ *
+ * Theme switching:
+ *   - no data-theme on <html>  → follows the system setting
+ *   - data-theme="light"       → always light
+ *   - data-theme="dark"        → always dark
+ */
+
+/* ---------- Fonts (self-hosted, SIL OFL 1.1 – see /fonts/OFL-*.txt) ---------- */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/fraunces-600-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/fraunces-600-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/inter-var-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/inter-var-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- 1. Primitive ---------- */
+
+:root {
+  /* Sage (primary) */
+  --sage-50: #e8efea;
+  --sage-300: #8fc1a9;
+  --sage-200: #a3cdb8;
+  --sage-100: #b6d8c7;
+  --sage-700: #3f6b57;
+  --sage-800: #355c4a;
+  --sage-850: #2c4d3e;
+  --sage-900: #10221a;
+  --sage-dark-tint: #22302a;
+
+  /* Light neutrals */
+  --white: #ffffff;
+  --paper-50: #f7f5f0;
+  --stone-200: #ddd8ce;
+  --ink-400: #8a938e;
+  --ink-600: #5b6661;
+  --ink-900: #1f2a26;
+
+  /* Dark neutrals */
+  --night-950: #121815;
+  --night-900: #1a221e;
+  --night-800: #222b26;
+  --night-700: #2c3631;
+  --night-500: #6b7771;
+  --mist-300: #a3ada8;
+  --mist-100: #e6eae7;
+
+  /* Clay – "not kept" (deliberately not alarm red) */
+  --clay-700: #a4513a;
+  --clay-50: #f8ece7;
+  --clay-300: #e39a82;
+  --clay-dark-tint: #33241f;
+
+  /* Amber – "partly" */
+  --amber-800: #8a5d14;
+  --amber-50: #f7efdf;
+  --amber-300: #e0b56a;
+  --amber-dark-tint: #312a1c;
+
+  /* Typography */
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.5rem;    /* 24px */
+  --text-2xl: 2rem;     /* 32px */
+  --text-3xl: 2.5rem;   /* 40px */
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.6;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* Spacing – 4/8px rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  /* Elevation (light) */
+  --shadow-sm: 0 1px 2px rgb(31 42 38 / 0.06);
+  --shadow-md: 0 4px 14px rgb(31 42 38 / 0.08);
+
+  /* Z-index */
+  --z-base: 0;
+  --z-sticky: 20;
+  --z-overlay: 40;
+  --z-modal: 100;
+  --z-toast: 1000;
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Sizes */
+  --touch-target: 44px;
+  --content-max: 36rem;
+  --icon-sm: 20px;
+  --icon-md: 24px;
+}
+
+/* ---------- 2. Semantic – light (default) ---------- */
+
+:root {
+  color-scheme: light;
+
+  --color-background: var(--paper-50);
+  --color-foreground: var(--ink-900);
+  --color-card: var(--white);
+  --color-muted-foreground: var(--ink-600);
+  --color-border: var(--stone-200);          /* decorative only */
+  --color-control-border: var(--ink-400);    /* inputs, toggles: ≥ 3:1 */
+
+  --color-primary: var(--sage-700);
+  --color-primary-hover: var(--sage-800);
+  --color-primary-active: var(--sage-850);
+  --color-on-primary: var(--white);
+  --color-primary-soft: var(--sage-50);      /* highlighted surfaces */
+
+  --color-kept: var(--sage-700);
+  --color-not-kept: var(--clay-700);
+  --color-not-kept-soft: var(--clay-50);
+  --color-partly: var(--amber-800);
+  --color-partly-soft: var(--amber-50);
+
+  --color-ring: var(--sage-700);
+
+  --shadow-card: var(--shadow-sm);
+  --shadow-raised: var(--shadow-md);
+}
+
+/* ---------- 2. Semantic – dark ----------
+ * The same block appears twice: once for "follow the system" and once for
+ * "always dark". CSS cannot share a declaration block between a media query
+ * and a selector, so keep the two in sync when changing a value. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-background: var(--night-950);
+    --color-foreground: var(--mist-100);
+    --color-card: var(--night-900);
+    --color-muted-foreground: var(--mist-300);
+    --color-border: var(--night-700);
+    --color-control-border: var(--night-500);
+
+    --color-primary: var(--sage-300);
+    --color-primary-hover: var(--sage-200);
+    --color-primary-active: var(--sage-100);
+    --color-on-primary: var(--sage-900);
+    --color-primary-soft: var(--sage-dark-tint);
+
+    --color-kept: var(--sage-300);
+    --color-not-kept: var(--clay-300);
+    --color-not-kept-soft: var(--clay-dark-tint);
+    --color-partly: var(--amber-300);
+    --color-partly-soft: var(--amber-dark-tint);
+
+    --color-ring: var(--sage-300);
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-raised: 0 4px 14px rgb(0 0 0 / 0.45);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-background: var(--night-950);
+  --color-foreground: var(--mist-100);
+  --color-card: var(--night-900);
+  --color-muted-foreground: var(--mist-300);
+  --color-border: var(--night-700);
+  --color-control-border: var(--night-500);
+
+  --color-primary: var(--sage-300);
+  --color-primary-hover: var(--sage-200);
+  --color-primary-active: var(--sage-100);
+  --color-on-primary: var(--sage-900);
+  --color-primary-soft: var(--sage-dark-tint);
+
+  --color-kept: var(--sage-300);
+  --color-not-kept: var(--clay-300);
+  --color-not-kept-soft: var(--clay-dark-tint);
+  --color-partly: var(--amber-300);
+  --color-partly-soft: var(--amber-dark-tint);
+
+  --color-ring: var(--sage-300);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-raised: 0 4px 14px rgb(0 0 0 / 0.45);
+}
+
+/* ---------- 3. Component ---------- */
+
+:root {
+  --button-height: 48px;
+  --button-radius: var(--radius-md);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-bg-hover: var(--color-primary-hover);
+  --button-primary-bg-active: var(--color-primary-active);
+  --button-primary-fg: var(--color-on-primary);
+  --button-secondary-border: var(--color-control-border);
+
+  --card-bg: var(--color-card);
+  --card-radius: var(--radius-lg);
+  --card-padding: var(--space-5);
+  --card-shadow: var(--shadow-card);
+  --card-border: var(--color-border);
+
+  --input-height: 48px;
+  --input-bg: var(--color-card);
+  --input-border: var(--color-control-border);
+  --input-radius: var(--radius-md);
+
+  --focus-ring: 3px solid var(--color-ring);
+  --focus-ring-offset: 2px;
+
+  --tabbar-height: 64px;
+  --tabbar-bg: var(--color-card);
+  --tabbar-border: var(--color-border);
+  --tabbar-fg: var(--color-muted-foreground);
+  --tabbar-fg-active: var(--color-primary);
+}
